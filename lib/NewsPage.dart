@@ -3,7 +3,7 @@ import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 
 
-fetchNews() async{
+Future<String> fetchNews() async{
   String apiKey = "31c21508fad64116acd229c10ac11e84";
   String url = "https://newsapi.org/v2/top-headlines?country=us&apiKey="+apiKey;
 
@@ -16,9 +16,20 @@ class NewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    String data = fetchNews();
+    return FutureBuilder(
+     future: fetchNews(),
+      builder: (context, snapshot) {
+        if(snapshot.hasData){
+          return Text(snapshot.data.toString());
+        }else{
+          return Center(
+            child: CircularProgressIndicator()
+          );
+        }
+        return Container();
+      },
 
-    return Text(data);
+    );
   }
 }
 

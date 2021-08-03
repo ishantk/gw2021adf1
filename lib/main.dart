@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'NewsPage.dart';
 
+// main function represents main thread
+// whatever we code in main, is executed by main thread
+// that too in a sequence
 void main() {
+  // to execute the app created by us
+  // MyApp -> Object
   runApp(MyApp());
 }
 
