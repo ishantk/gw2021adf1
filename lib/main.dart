@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'NewsPage.dart';
+import 'package:gw2021adf1/home/home-page.dart';
+import 'package:gw2021adf1/home/splash-page.dart';
+import 'package:gw2021adf1/tutorials/NewsPage.dart';
 
 // main function represents main thread
 // whatever we code in main, is executed by main thread
@@ -28,11 +30,18 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-       home: HomePage(),
+       routes: {
+         "/": (context) => SplashPage(),
+         "/home": (context) => HomePage(),
+         "/news": (context) => NewsPage(),
+       },
+
+      initialRoute: "/",
     );
   }
 }
 
+/*
 class HomePage extends StatelessWidget {
 
   @override
@@ -45,3 +54,4 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+*/
