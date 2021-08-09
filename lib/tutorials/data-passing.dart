@@ -28,6 +28,9 @@ class _PageOneState extends State<PageOne> {
 
   String title = "Page One";
 
+  TextEditingController controllerUID = TextEditingController();
+  TextEditingController controllerName = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,23 +44,43 @@ class _PageOneState extends State<PageOne> {
             children: [
               Text("Enter Details of User"),
               SizedBox(height: 10,),
-              TextField(),
-              TextField(),
+              TextField(
+
+                controller: controllerUID ,
+              ),
+              TextField(
+                controller: controllerName,
+              ),
               SizedBox(height: 10,),
+
+              /*TextButton(
+                  onPressed: (){
+
+                  }, child: Text("SUBMIT")
+              ),*/
+
+              //ElevatedButton(onPressed: (){}, child: Text("SUBMIT")),
+
+              OutlinedButton(onPressed: (){}, child: Text("SUBMIT")),
+
               InkWell(
                 child: Text("SUBMIT"),
                 onTap: () async {
                   // Create an Object
                   User user = new User();
                   // Put Data in Object
-                  user.uid = "ABC101";
-                  user.name = "John Watson";
-                  User resultUser = await Navigator.push(context,
+                  user.uid = controllerUID.text;
+                  user.name = controllerName.text;
+
+                  /*User resultUser = await Navigator.push(context,
                       MaterialPageRoute(builder: (context) => PageTwo(user: user))
-                  );
-                  setState(() {
+                  );*/
+
+                  Navigator.pushNamed(context, "/two", arguments: user);
+
+                  /*setState(() {
                     title = resultUser.uid.toString() + " "+ resultUser.name.toString();
-                  });
+                  });*/
                 },
               )
             ],
@@ -69,12 +92,15 @@ class _PageOneState extends State<PageOne> {
 
 class PageTwo extends StatelessWidget {
 
-  User? user;
 
-  PageTwo({Key? key, this.user}) : super(key: key);
+  //PageTwo({Key? key, this.user}) : super(key: key);
+  PageTwo({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    User user = ModalRoute.of(context)!.settings.arguments as User;
+
     return Scaffold(
         appBar: AppBar(
         title: Text("Page Two"),
@@ -84,9 +110,9 @@ class PageTwo extends StatelessWidget {
     mainAxisAlignment: MainAxisAlignment.center,
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
-      Text(user!.uid.toString()),
+      Text(user.uid.toString()),
       SizedBox(height: 10,),
-      Text(user!.name.toString()),
+      Text(user.name.toString()),
       InkWell(
       child: Text("DONE"),
         onTap: (){

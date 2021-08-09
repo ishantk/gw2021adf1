@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gw2021adf1/home/home-page.dart';
 import 'package:gw2021adf1/home/splash-page.dart';
 import 'package:gw2021adf1/tutorials/NewsPage.dart';
+import 'package:gw2021adf1/tutorials/data-passing.dart';
 
 // main function represents main thread
 // whatever we code in main, is executed by main thread
@@ -34,9 +35,11 @@ class MyApp extends StatelessWidget {
          "/": (context) => SplashPage(),
          "/home": (context) => HomePage(),
          "/news": (context) => NewsPage(),
+         "/one": (context) => PageOne(),
+         "/two": (context) => PageTwo(),
        },
 
-      initialRoute: "/",
+      initialRoute: "/one",
     );
   }
 }
