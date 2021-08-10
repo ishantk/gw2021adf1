@@ -8,7 +8,7 @@ class SplashPage extends StatelessWidget {
         Duration(seconds: 3),
         (){
           //Navigator.pushNamed(context, "/home");
-          Navigator.pushReplacementNamed(context, "/home");
+          Navigator.pushReplacementNamed(context, "/login");
         }
     );
   }

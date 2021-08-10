@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gw2021adf1/auth/login-page.dart';
 import 'package:gw2021adf1/home/home-page.dart';
 import 'package:gw2021adf1/home/splash-page.dart';
 import 'package:gw2021adf1/tutorials/NewsPage.dart';
@@ -37,9 +38,10 @@ class MyApp extends StatelessWidget {
          "/news": (context) => NewsPage(),
          "/one": (context) => PageOne(),
          "/two": (context) => PageTwo(),
+         "/login": (context) => LoginPage(),
        },
 
-      initialRoute: "/one",
+      initialRoute: "/",
     );
   }
 }
