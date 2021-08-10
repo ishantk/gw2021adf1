@@ -39,9 +39,62 @@ class _LoginPageState extends State<LoginPage> {
           Align(
             alignment: Alignment.center,
             child: Card(
+              color: Colors.white,
               margin: EdgeInsets.all(16),
               child: Column(
+                children: [
+                  TextField(
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.blueGrey
+                    ),
+                    decoration: InputDecoration(
+                      filled: true,
+                      alignLabelWithHint: true,
+                      labelText: "Email ID",
+                      labelStyle: TextStyle(color: Colors.green),
+                      border: UnderlineInputBorder(
+                        borderRadius: BorderRadius.circular(4),
+                        borderSide: BorderSide(
+                          width: 1,
+                          style: BorderStyle.solid,
+                          color: Colors.blueGrey
+                        )
+                      )
 
+                    ),
+                  ),
+                  SizedBox(height: 6,),
+                  TextField(
+                    obscureText: true,
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.blueGrey
+                    ),
+                    decoration: InputDecoration(
+                        filled: true,
+                        alignLabelWithHint: true,
+                        labelText: "Password",
+                        labelStyle: TextStyle(color: Colors.green),
+                        border: UnderlineInputBorder(
+                            borderRadius: BorderRadius.circular(4),
+                            borderSide: BorderSide(
+                                width: 1,
+                                style: BorderStyle.solid,
+                                color: Colors.blueGrey
+                            )
+                        )
+
+                    ),
+                  ),
+                  SizedBox(height: 6,),
+                  ElevatedButton(
+                    child: Text("LOGIN"),
+                    onPressed: (){
+
+                    },
+                  )
+                ],
               ),
             ),
           )
