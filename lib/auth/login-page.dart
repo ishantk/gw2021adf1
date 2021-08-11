@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -8,6 +9,32 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+
+  void authenticateUser(BuildContext context) async{
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: loginIDController.text,
+          password: passwordController.text
+      );
+
+      print("User ID is:"+userCredential.user!.uid.toString());
+
+      if(userCredential.user!.uid.toString().isNotEmpty){
+        Navigator.pushReplacementNamed(context, "/home");
+      }else{
+        // Login Failed
+      }
+
+
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+    }
+  }
 
   TextEditingController loginIDController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
@@ -140,7 +167,7 @@ class _LoginPageState extends State<LoginPage> {
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   return 'Password is required. Please Enter.';
-                                } else if (value!.trim().length < 6) {
+                                } else if (value.trim().length < 6) {
                                   return 'Password must be 6 characters.';
                                 }
                                 return null;
@@ -198,7 +225,7 @@ class _LoginPageState extends State<LoginPage> {
                                 child: TextButton(
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {
-
+                                      authenticateUser(context);
                                     }
                                   },
                                   style: TextButton.styleFrom(

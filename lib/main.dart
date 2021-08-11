@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:gw2021adf1/auth/login-page.dart';
 import 'package:gw2021adf1/home/home-page.dart';
 import 'package:gw2021adf1/home/splash-page.dart';
@@ -8,7 +9,10 @@ import 'package:gw2021adf1/tutorials/data-passing.dart';
 // main function represents main thread
 // whatever we code in main, is executed by main thread
 // that too in a sequence
-void main() {
+Future<void> main() async{
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   // to execute the app created by us
   // MyApp -> Object
   runApp(MyApp());
