@@ -14,8 +14,8 @@ class _LoginPageState extends State<LoginPage> {
   void authenticateUser(BuildContext context) async{
     try {
       UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: loginIDController.text,
-          password: passwordController.text
+          email: loginIDController.text.trim(),
+          password: passwordController.text.trim()
       );
 
       print("User ID is:"+userCredential.user!.uid.toString());
@@ -272,6 +272,19 @@ class _LoginPageState extends State<LoginPage> {
                                 'Terms & Conditions',
                                 style: TextStyle(
                                   fontSize: 14.0, color: Colors.orange, fontWeight: FontWeight.w300, decoration: TextDecoration.underline,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            SizedBox(height: 4),
+                            InkWell(
+                              onTap: (){
+                                Navigator.pushNamed(context, "/register");
+                              },
+                              child: Text(
+                                'New User? Register Here',
+                                style: TextStyle(
+                                  fontSize: 18.0, color: Colors.green, fontWeight: FontWeight.w500,
                                 ),
                                 textAlign: TextAlign.center,
                               ),

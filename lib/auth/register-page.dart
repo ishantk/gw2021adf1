@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:gw2021adf1/model/user.dart' as myuser;
+import 'package:gw2021adf1/model/user.dart';
 
 class RegisterUserPage extends StatefulWidget {
   const RegisterUserPage({Key? key}) : super(key: key);
@@ -16,14 +19,20 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
     try {
 
       UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: loginIDController.text,
-          password: passwordController.text
+          email: loginIDController.text.trim(),
+          password: passwordController.text.trim()
       );
 
       print("User ID is:"+userCredential.user!.uid.toString());
 
       if(userCredential.user!.uid.toString().isNotEmpty){
-        Navigator.pushReplacementNamed(context, "/home");
+
+        AppUser user = AppUser(uid:userCredential.user!.uid, name:nameController.text.trim(), email:loginIDController.text.trim());
+        var dataToSave = user.toMap();
+
+        FirebaseFirestore.instance.collection("users").doc().set(dataToSave).then((value) => Navigator.pushReplacementNamed(context, "/home"));
+
+        //Navigator.pushReplacementNamed(context, "/home");
       }else{
         // Registration Failed
         setState(() {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:gw2021adf1/auth/login-page.dart';
+import 'package:gw2021adf1/auth/register-page.dart';
 import 'package:gw2021adf1/home/home-page.dart';
 import 'package:gw2021adf1/home/splash-page.dart';
 import 'package:gw2021adf1/tutorials/NewsPage.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
          "/one": (context) => PageOne(),
          "/two": (context) => PageTwo(),
          "/login": (context) => LoginPage(),
+         "/register": (context) => RegisterUserPage(),
        },
 
       initialRoute: "/",
