@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -26,9 +27,10 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
               onPressed: (){
-
-          }, icon: Icon(Icons.shopping_cart),
-            tooltip: "Shopping Cart",
+                FirebaseAuth.instance.signOut();
+                Navigator.pushReplacementNamed(context, "/login");
+          }, icon: Icon(Icons.logout),
+            tooltip: "Log Out",
 
           )
         ],
