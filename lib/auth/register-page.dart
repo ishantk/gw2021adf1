@@ -1,19 +1,21 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class RegisterUserPage extends StatefulWidget {
+  const RegisterUserPage({Key? key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RegisterUserPageState createState() => _RegisterUserPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+
+class _RegisterUserPageState extends State<RegisterUserPage> {
 
 
-  void authenticateUser(BuildContext context) async{
+  void registerUser(BuildContext context) async{
     try {
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+
+      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: loginIDController.text,
           password: passwordController.text
       );
@@ -23,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
       if(userCredential.user!.uid.toString().isNotEmpty){
         Navigator.pushReplacementNamed(context, "/home");
       }else{
-        // Login Failed
+        // Registration Failed
         setState(() {
           showLoader=false;
           // Show a SnackBar | It will have a message (Login Failed)
@@ -41,6 +43,7 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  TextEditingController nameController = new TextEditingController();
   TextEditingController loginIDController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
 
@@ -97,13 +100,69 @@ class _LoginPageState extends State<LoginPage> {
                             Image.asset("assets/food.png", fit: BoxFit.fill),
                             SizedBox(height: 4,),
                             Text(
-                              "Login Here",
+                              "Register Yourself",
                               style: TextStyle(
                                   fontSize: 16,
                                   color: Colors.green,
                                   fontWeight: FontWeight.w500),
                             ),
                             SizedBox(height: 12),
+                            TextFormField(
+                              controller: nameController,
+                              style: TextStyle(
+                                  fontSize: 17.0, color: Colors.grey.shade900),
+                              keyboardType: TextInputType.text,
+                              textCapitalization: TextCapitalization.words,
+                              autofocus: false,
+                              enabled: true,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Name is required. Please Enter.';
+                                } else if (value.trim().length == 0) {
+                                  return 'Name is required. Please Enter.';
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                filled: true,
+                                alignLabelWithHint: true,
+                                labelText: "Full Name",
+                                labelStyle: TextStyle(color: Colors.green),
+                                fillColor: Colors.transparent,
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(4.0),
+                                    borderSide: BorderSide(
+                                        width: 1,
+                                        style: BorderStyle.solid,
+                                        color: Colors.grey)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(4.0),
+                                    borderSide: BorderSide(
+                                        width: 1,
+                                        style: BorderStyle.solid,
+                                        color: Colors.black)),
+                                errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(4.0),
+                                    borderSide: BorderSide(
+                                        width: 1,
+                                        style: BorderStyle.solid,
+                                        color: Colors.red)),
+                                disabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(4.0),
+                                    borderSide: BorderSide(
+                                        width: 1,
+                                        style: BorderStyle.solid,
+                                        color: Colors.grey)),
+                                border: UnderlineInputBorder(
+                                    borderRadius: BorderRadius.circular(4.0),
+                                    borderSide: BorderSide(
+                                        width: 1,
+                                        style: BorderStyle.solid,
+                                        color: Colors.grey)),
+                                contentPadding:
+                                new EdgeInsets.fromLTRB(8.0, 0.0, 0.0, 0.0),
+                              ),
+                            ),
                             TextFormField(
                               controller: loginIDController,
                               style: TextStyle(
@@ -232,8 +291,8 @@ class _LoginPageState extends State<LoginPage> {
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {
                                       setState(() {
-                                        showLoader=true;
-                                        authenticateUser(context);
+                                        showLoader = true;
+                                        registerUser(context);
                                       });
 
                                     }
@@ -243,13 +302,13 @@ class _LoginPageState extends State<LoginPage> {
                                     elevation: 10,
                                   ),
                                   child: Text(
-                                    'Login',
+                                    'Register',
                                     style: TextStyle(
                                         fontSize: 16.0, color: Colors.white),
                                     textAlign: TextAlign.center,
                                   ),
                                 )),
-                            Text("By Logging in You accept our Terms & Conditions", style: TextStyle(
+                            Text("By Registering in You accept our Terms & Conditions", style: TextStyle(
                                 fontSize: 12.0, color: Colors.grey, fontWeight: FontWeight.w300),
                               textAlign: TextAlign.center,),
                             InkWell(
@@ -286,16 +345,3 @@ class _LoginPageState extends State<LoginPage> {
         ));  }
 }
 
-class MyTextField extends StatefulWidget {
-  const MyTextField({Key? key}) : super(key: key);
-
-  @override
-  _MyTextFieldState createState() => _MyTextFieldState();
-}
-
-class _MyTextFieldState extends State<MyTextField> {
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField();
-  }
-}

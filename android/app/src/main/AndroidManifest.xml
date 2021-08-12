@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.auribises.gw2021adf1">
    <application
-        android:label="gw2021adf1"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Foodie"
+        android:icon="@drawable/food">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
