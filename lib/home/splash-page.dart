@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gw2021adf1/home/home-page.dart';
+import 'package:gw2021adf1/util/constants.dart';
 
 class SplashPage extends StatelessWidget {
 
@@ -36,7 +37,7 @@ class SplashPage extends StatelessWidget {
           children: [
             Image.asset("food.png"),
             SizedBox(height: 8,),
-            Text("Foodie", style: TextStyle(color: Colors.deepOrange, fontSize: 24),),
+            Text(APP_NAME, style: TextStyle(color: Colors.deepOrange, fontSize: 24),),
             Divider(),
             SizedBox(height: 4,),
             Text("We Deliver Fresh", style: TextStyle(color: Colors.grey, fontSize: 18))
