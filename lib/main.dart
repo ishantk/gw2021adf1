@@ -6,6 +6,7 @@ import 'package:gw2021adf1/home/home-page.dart';
 import 'package:gw2021adf1/home/splash-page.dart';
 import 'package:gw2021adf1/tutorials/NewsPage.dart';
 import 'package:gw2021adf1/tutorials/data-passing.dart';
+import 'package:gw2021adf1/tutorials/image-picker-task.dart';
 
 // main function represents main thread
 // whatever we code in main, is executed by main thread
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
          "/two": (context) => PageTwo(),
          "/login": (context) => LoginPage(),
          "/register": (context) => RegisterUserPage(),
+         "/image-picker": (context) => ImagePickerPage(),
        },
 
       initialRoute: "/",

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gw2021adf1/custom-widgets/counter.dart';
@@ -82,10 +83,14 @@ class _DishesPageState extends State<DishesPage> {
                             ),
                             ]
                         ),
-                        Divider(),
-
                         Text(categories, style: TextStyle(fontSize: 16, color: Colors.black45),),
-                        Counter(),
+                        Divider(),
+                        Row(
+                          children: [
+                            Spacer(),
+                            Counter(),
+                          ],
+                        ),
                         SizedBox(height: 10,)
                       ],
                     ),

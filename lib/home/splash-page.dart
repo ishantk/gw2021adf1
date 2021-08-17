@@ -7,6 +7,9 @@ class SplashPage extends StatelessWidget {
 
   navigateToHome(BuildContext context){
 
+    Navigator.pushNamed(context, "/image-picker");
+
+    /*
     User? user = FirebaseAuth.instance.currentUser;
 
     //String uid = FirebaseAuth.instance.currentUser!.uid;
@@ -21,7 +24,7 @@ class SplashPage extends StatelessWidget {
             Navigator.pushReplacementNamed(context, "/login");
           }
         }
-    );
+    );*/
   }
 
   @override
