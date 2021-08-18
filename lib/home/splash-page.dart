@@ -5,12 +5,15 @@ import 'package:gw2021adf1/util/constants.dart';
 
 class SplashPage extends StatelessWidget {
 
-  navigateToHome(BuildContext context){
+  navigateToHome(BuildContext context) async{
 
-    Navigator.pushNamed(context, "/image-picker");
+    //Navigator.pushNamed(context, "/image-picker");
 
-    /*
+
     User? user = FirebaseAuth.instance.currentUser;
+    /*
+      Fetch the Details of User and save the details for reference created in constants.dart
+     */
 
     //String uid = FirebaseAuth.instance.currentUser!.uid;
 
@@ -24,7 +27,7 @@ class SplashPage extends StatelessWidget {
             Navigator.pushReplacementNamed(context, "/login");
           }
         }
-    );*/
+    );
   }
 
   @override

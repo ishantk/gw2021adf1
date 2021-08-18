@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gw2021adf1/pages/restaurants-page.dart';
+import 'package:gw2021adf1/profile/user-profile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   List<Widget> widgets = [
     RestaurantsPage(),
     Center(child: Text("SEARCH PAGE")),
-    Center(child: Text("PROFILE PAGE")),
+    UserProfilePage(),
   ];
 
   @override
