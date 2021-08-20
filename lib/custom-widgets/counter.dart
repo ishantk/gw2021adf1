@@ -1,7 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:gw2021adf1/model/dish.dart';
+import 'package:gw2021adf1/util/constants.dart';
 
 class Counter extends StatefulWidget {
-  const Counter({Key? key}) : super(key: key);
+
+  Map<String, dynamic>? dish;
+
+  Counter({Key? key, @required this.dish}) : super(key: key);
 
   @override
   _CounterState createState() => _CounterState();
@@ -13,6 +19,27 @@ class _CounterState extends State<Counter> {
 
   @override
   Widget build(BuildContext context) {
+
+    updateDishInCart(){
+      Dish cartDish = Dish(name: widget.dish!['name'].toString(),
+          price: widget.dish!['price'],
+          quantity: initialValue,
+          totalPrice: initialValue * (widget.dish!['price'] as int)
+      );
+
+      // here you need to now add the dish with quantity as 1 in dishes cart
+      FirebaseFirestore.instance.collection(Util.USERS_COLLECTION)
+          .doc(Util.appUser!.uid)
+          .collection(Util.CART_COLLECTION).doc(widget.dish!['docId']).set(cartDish.toMap());
+
+    }
+
+    deleteDishFromCart(){
+      FirebaseFirestore.instance.collection(Util.USERS_COLLECTION)
+          .doc(Util.appUser!.uid)
+          .collection(Util.CART_COLLECTION).doc(widget.dish!['docId']).delete();
+    }
+
     return Container(
       width: 140,
       height: 40,
@@ -24,6 +51,7 @@ class _CounterState extends State<Counter> {
               onPressed: () {
                 setState(() {
                   initialValue++;
+                  updateDishInCart();
                 });
               },
               child: Text("ADD",
@@ -36,9 +64,13 @@ class _CounterState extends State<Counter> {
                     setState(() {
                       if (initialValue <= 0) {
                         initialValue = 0;
+                        deleteDishFromCart();
+                        // dish has to be deleted from cart
                       } else {
                         initialValue--;
+                        updateDishInCart();
                       }
+
                     });
                   },
                   child: Text(
@@ -54,6 +86,7 @@ class _CounterState extends State<Counter> {
                   onPressed: () {
                     setState(() {
                       initialValue++;
+                      updateDishInCart();
                     });
                   },
                   child: Text(

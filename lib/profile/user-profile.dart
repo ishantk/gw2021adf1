@@ -13,21 +13,24 @@ class UserProfilePage extends StatefulWidget {
 
 class _UserProfilePageState extends State<UserProfilePage> {
 
-  AppUser? appUser;
+  /*AppUser? appUser;
 
   fetchUserDetails() async{
     String uid = await FirebaseAuth.instance.currentUser!.uid.toString();  
-    DocumentSnapshot document = await FirebaseFirestore.instance.collection(USERS_COLLECTION).doc(uid).get();
+    DocumentSnapshot document = await FirebaseFirestore.instance.collection(Util.USERS_COLLECTION).doc(uid).get();
     appUser = AppUser();
 
     appUser!.uid = document.get('uid').toString();
     appUser!.name = document.get('name').toString();
     appUser!.email = document.get('email').toString();
     appUser!.imageUrl = document.get('imageUrl').toString();
-  }
+  }*/
   
   @override
   Widget build(BuildContext context) {
+
+    //return FutureBuilder(builder: builder, future: fetchUserDetails(),)
+
     return ListView(
         padding: EdgeInsets.all(16),
         children: [
@@ -39,8 +42,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 Padding(padding: EdgeInsets.all(8)),
                 InkWell(
                   child: CircleAvatar(
-                    backgroundImage: null,
-                    radius: 100,
+                    backgroundImage: NetworkImage(Util.appUser!.imageUrl.toString()),
+                    radius: 60,
                   ),
                   onTap: (){
                     // image picker logic goes here
@@ -48,8 +51,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 ),
                 Padding(padding: EdgeInsets.all(8)),
                 Divider(),
-                Text(appUser!.name.toString(), style: TextStyle(color: Colors.blueGrey, fontSize: 20),),
-                Text(appUser!.email.toString(), style: TextStyle(color: Colors.black38, fontSize: 18),)
+                Text(Util.appUser!.name.toString(), style: TextStyle(color: Colors.blueGrey, fontSize: 20),),
+                Text(Util.appUser!.email.toString(), style: TextStyle(color: Colors.black38, fontSize: 18),)
               ],
             ),
           ),

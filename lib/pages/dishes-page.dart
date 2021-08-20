@@ -19,8 +19,8 @@ class _DishesPageState extends State<DishesPage> {
   fetchRestaurants(){
     // Stream is a Collection i.e. a List of QuerySnapshot
     // QuerySnapshot is our Document :)
-    Stream<QuerySnapshot> stream = FirebaseFirestore.instance.collection(RESTAURNAT_COLLECTION)
-    .doc(widget.restaurantId).collection(DISHES_COLLECTION).snapshots();
+    Stream<QuerySnapshot> stream = FirebaseFirestore.instance.collection(Util.RESTAURNAT_COLLECTION)
+    .doc(widget.restaurantId).collection(Util.DISHES_COLLECTION).snapshots();
     return stream;
   }
 
@@ -28,7 +28,15 @@ class _DishesPageState extends State<DishesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(APP_NAME),
+        title: Text(Locale.locale['appTitle'].toString()),
+        actions: [
+          IconButton(
+            onPressed: (){
+              Navigator.pushReplacementNamed(context, "/cart");
+            }, icon: Icon(Icons.shopping_cart),
+            tooltip: "Cart",
+          ),
+        ],
       ),
       body: StreamBuilder(
         stream: fetchRestaurants(),
@@ -51,6 +59,7 @@ class _DishesPageState extends State<DishesPage> {
               children: snapshot.data!.docs.map<Widget>((DocumentSnapshot document){
                 //document.id -> Restaurant Document ID
                 Map<String, dynamic> map = document.data()! as Map<String, dynamic>;
+                map['docId'] = document.id.toString();
 
                 List category = map['category'];
                 String categories = "";
@@ -88,7 +97,7 @@ class _DishesPageState extends State<DishesPage> {
                         Row(
                           children: [
                             Spacer(),
-                            Counter(),
+                            Counter(dish: map,),
                           ],
                         ),
                         SizedBox(height: 10,)

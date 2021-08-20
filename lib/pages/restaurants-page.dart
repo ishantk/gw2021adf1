@@ -15,7 +15,7 @@ class _RestaurantsPageState extends State<RestaurantsPage> {
   fetchRestaurants(){
     // Stream is a Collection i.e. a List of QuerySnapshot
     // QuerySnapshot is our Document :)
-    Stream<QuerySnapshot> stream = FirebaseFirestore.instance.collection(RESTAURNAT_COLLECTION).snapshots();
+    Stream<QuerySnapshot> stream = FirebaseFirestore.instance.collection(Util.RESTAURNAT_COLLECTION).snapshots();
     return stream;
   }
 

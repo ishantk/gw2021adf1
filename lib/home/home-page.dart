@@ -28,6 +28,13 @@ class _HomePageState extends State<HomePage> {
         title: Text("Foodie"),
         actions: [
           IconButton(
+            onPressed: (){
+              Navigator.pushReplacementNamed(context, "/cart");
+            }, icon: Icon(Icons.shopping_cart),
+            tooltip: "Cart",
+
+          ),
+          IconButton(
               onPressed: (){
                 FirebaseAuth.instance.signOut();
                 Navigator.pushReplacementNamed(context, "/login");
