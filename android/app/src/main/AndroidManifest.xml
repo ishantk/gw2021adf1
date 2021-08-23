@@ -7,6 +7,10 @@
    <application
         android:label="Foodie"
         android:icon="@drawable/food">
+
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyDX_D9CDTWJLlcV32QaqWCIouWqBf-SxTE"/>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

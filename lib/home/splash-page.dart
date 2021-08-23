@@ -19,7 +19,7 @@ class _SplashPageState extends State<SplashPage> {
     Future.delayed(
         Duration(seconds: 3),
             (){
-           Navigator.pushNamed(context, "/location-tutorial");
+           Navigator.pushNamed(context, "/google-maps-tutorial");
         }
     );
   }

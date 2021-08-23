@@ -8,6 +8,7 @@ import 'package:gw2021adf1/pages/cart-page.dart';
 import 'package:gw2021adf1/tutorials/NewsPage.dart';
 import 'package:gw2021adf1/tutorials/data-passing.dart';
 import 'package:gw2021adf1/tutorials/fetch-current-location.dart';
+import 'package:gw2021adf1/tutorials/google-maps-with-location.dart';
 import 'package:gw2021adf1/tutorials/image-picker-task.dart';
 import 'package:gw2021adf1/util/constants.dart';
 
@@ -55,6 +56,7 @@ class MyApp extends StatelessWidget {
          "/image-picker": (context) => ImagePickerPage(),
          "/cart": (context) => CartPage(),
          "/location-tutorial": (context) => FetchCurrentLocationPage(),
+         "/google-maps-tutorial": (context) => GoogleMapsPage(),
        },
 
       initialRoute: "/",
