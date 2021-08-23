@@ -5,23 +5,26 @@ import 'package:gw2021adf1/home/home-page.dart';
 import 'package:gw2021adf1/model/user.dart';
 import 'package:gw2021adf1/util/constants.dart';
 
-class SplashPage extends StatelessWidget {
 
-  fetchUserDetails() async{
-    String uid = await FirebaseAuth.instance.currentUser!.uid.toString();
-    DocumentSnapshot document = await FirebaseFirestore.instance.collection(Util.USERS_COLLECTION).doc(uid).get();
-    Util.appUser = AppUser();
+class SplashPage extends StatefulWidget {
+  const SplashPage({Key? key}) : super(key: key);
 
-    Util.appUser!.uid = document.get('uid').toString();
-    Util.appUser!.name = document.get('name').toString();
-    Util.appUser!.email = document.get('email').toString();
-    Util.appUser!.imageUrl = document.get('imageUrl').toString();
+  @override
+  _SplashPageState createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
+
+  tutorialNavigation(BuildContext context) async{
+    Future.delayed(
+        Duration(seconds: 3),
+            (){
+           Navigator.pushNamed(context, "/location-tutorial");
+        }
+    );
   }
 
   navigateToHome(BuildContext context) async{
-
-    //Navigator.pushNamed(context, "/image-picker");
-
 
     User? user = FirebaseAuth.instance.currentUser;
     /*
@@ -32,7 +35,7 @@ class SplashPage extends StatelessWidget {
 
     Future.delayed(
         Duration(seconds: 3),
-        (){
+            (){
           //Navigator.pushNamed(context, "/home");
           if(user != null){
             Navigator.pushReplacementNamed(context, "/home");
@@ -46,9 +49,9 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-
-    navigateToHome(context);
-    fetchUserDetails();
+    //navigateToHome(context);
+    //Util.fetchUserDetails();
+    tutorialNavigation(context);
 
     return Scaffold(
       body: Center(
@@ -68,3 +71,4 @@ class SplashPage extends StatelessWidget {
     );
   }
 }
+

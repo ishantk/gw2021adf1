@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gw2021adf1/pages/restaurants-page.dart';
 import 'package:gw2021adf1/profile/user-profile.dart';
+import 'package:gw2021adf1/util/constants.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -36,6 +37,7 @@ class _HomePageState extends State<HomePage> {
           ),
           IconButton(
               onPressed: (){
+                Util.appUser = null;
                 FirebaseAuth.instance.signOut();
                 Navigator.pushReplacementNamed(context, "/login");
           }, icon: Icon(Icons.logout),
