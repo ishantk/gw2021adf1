@@ -80,7 +80,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
             subtitle: Text("Update Your Addresses for Delivery"),
             trailing: Icon(Icons.keyboard_arrow_right_sharp),
             onTap: (){
-
+              Navigator.pushNamed(context, AppRoutes.ADDRESS_PAGE_ROUTE);
             },
           ),
           ListTile(
@@ -89,7 +89,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
             subtitle: Text("Raise Your Queries"),
             trailing: Icon(Icons.keyboard_arrow_right_sharp),
             onTap: (){
-
+                
             },
           ),
           ListTile(

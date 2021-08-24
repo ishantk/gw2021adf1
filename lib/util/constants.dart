@@ -58,3 +58,7 @@ class Locale{
   static Map<String, String> locale = hindiLocaleMap;
 }
 
+class AppRoutes{
+  static final String ADDRESS_PAGE_ROUTE = "/addresses";
+}
+

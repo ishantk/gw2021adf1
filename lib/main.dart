@@ -5,6 +5,7 @@ import 'package:gw2021adf1/auth/register-page.dart';
 import 'package:gw2021adf1/home/home-page.dart';
 import 'package:gw2021adf1/home/splash-page.dart';
 import 'package:gw2021adf1/pages/cart-page.dart';
+import 'package:gw2021adf1/profile/user-addresses.dart';
 import 'package:gw2021adf1/tutorials/NewsPage.dart';
 import 'package:gw2021adf1/tutorials/data-passing.dart';
 import 'package:gw2021adf1/tutorials/fetch-current-location.dart';
@@ -53,6 +54,7 @@ class MyApp extends StatelessWidget {
          "/two": (context) => PageTwo(),
          "/login": (context) => LoginPage(),
          "/register": (context) => RegisterUserPage(),
+         AppRoutes.ADDRESS_PAGE_ROUTE:(context) => UserAddressesPage(),
          "/image-picker": (context) => ImagePickerPage(),
          "/cart": (context) => CartPage(),
          "/location-tutorial": (context) => FetchCurrentLocationPage(),
