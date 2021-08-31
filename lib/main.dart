@@ -68,6 +68,19 @@ class _MyAppState extends State<MyApp> {
           }
     });
 
+    // For Sending notification to a particular user
+    // Token must be saved in the DB
+    /*FirebaseMessaging.instance.getToken().then((value){
+      print("VALUE:"+value.toString());
+      print("TYPE:"+value.runtimeType.toString());
+    });*/
+
+    // To send notification on some topic
+    //FirebaseMessaging.instance.subscribeToTopic("healthy-tips");
+
+    //FirebaseMessaging.instance.unsubscribeFromTopic("healthy-tips");
+
+
     FirebaseMessaging.onMessage.listen((RemoteMessage? message) {
 
       RemoteNotification? notification = message!.notification;

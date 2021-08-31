@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:geocoder/geocoder.dart';
+// import 'package:geocoder/geocoder.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
@@ -21,7 +21,7 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
   bool? _serviceEnabled;
   PermissionStatus? _permissionGranted;
   LocationData? _locationData;
-  Address? firstAddress;
+  // Address? firstAddress;
 
   CameraPosition auribises = CameraPosition(
     target: LatLng(30.9024779,75.8201934),
@@ -48,13 +48,13 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
 
     _locationData = await location.getLocation();
 
-    final coordinates = new Coordinates(1.10, 45.50);
-    var addresses = await Geocoder.local.findAddressesFromCoordinates(coordinates);
+    // final coordinates = new Coordinates(1.10, 45.50);
+    // var addresses = await Geocoder.local.findAddressesFromCoordinates(coordinates);
 
 
     setState(() {
 
-      firstAddress = addresses.first;
+      // firstAddress = addresses.first;
 
       auribises = CameraPosition(
         target: LatLng(_locationData!.latitude!, _locationData!.longitude!),
@@ -80,8 +80,8 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
 
       },
       infoWindow: InfoWindow(
-        title: firstAddress!.locality.toString(),
-        snippet: firstAddress!.postalCode.toString(),
+        // title: firstAddress!.locality.toString(),
+        // snippet: firstAddress!.postalCode.toString(),
         onTap: (){
 
         }

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gw2021adf1/model/user.dart';
+import 'package:connectivity/connectivity.dart';
 
 // final String APP_NAME = "Foodie";
 // final String USERS_COLLECTION = "users";
@@ -9,6 +10,11 @@ import 'package:gw2021adf1/model/user.dart';
 // AppUser? user;
 
 class Util {
+
+  static Future<bool> isInternetConnected() async{
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    return connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi;
+  }
 
   static fetchUserDetails() async{
     String uid = await FirebaseAuth.instance.currentUser!.uid.toString();
@@ -37,6 +43,7 @@ class Util {
   static String RESTAURNAT_COLLECTION = "restaurants";
   static String DISHES_COLLECTION = "dishes";
   static String CART_COLLECTION = "cart";
+  static String EXTRA_COLLECTION = "extras";
   static AppUser? appUser;
 
   static String imagePath = "NA";
