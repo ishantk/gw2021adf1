@@ -49,9 +49,9 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
 
-    //navigateToHome(context);
-    //Util.fetchUserDetails();
-    tutorialNavigation(context);
+    navigateToHome(context);
+    Util.fetchUserDetails();
+    //tutorialNavigation(context);
 
     return Scaffold(
       body: Center(

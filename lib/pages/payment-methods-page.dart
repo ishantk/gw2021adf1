@@ -10,22 +10,28 @@ class PaymentMethodsPage extends StatefulWidget {
 }
 
 class _PaymentMethodsPageState extends State<PaymentMethodsPage> {
-  fetchPaymentMethods() async{
 
-    bool result = await Util.isInternetConnected();
+   fetchPaymentMethods(){
 
-    if(result) {
-      // Stream is a Collection i.e. a List of QuerySnapshot
-      // QuerySnapshot is our Document :)
-      Stream<QuerySnapshot> stream = FirebaseFirestore.instance.collection(
-          Util.EXTRA_COLLECTION)
-          .doc('payment-methods').collection('methods').snapshots();
-      return stream;
-    }else{
-      // show the AlertDialog or some UI that internet is not connected
-    }
+    //bool result = await Util.isInternetConnected();
+
+    // if(result) {
+    //   // Stream is a Collection i.e. a List of QuerySnapshot
+    //   // QuerySnapshot is our Document :)
+    //   Stream<QuerySnapshot> stream = FirebaseFirestore.instance.collection(
+    //       Util.EXTRA_COLLECTION)
+    //       .doc('payment-methods').collection('methods').snapshots();
+    // }else{
+    //
+    // }
+
+    Stream<QuerySnapshot> stream = FirebaseFirestore.instance.collection(
+        Util.EXTRA_COLLECTION)
+        .doc('payment-methods').collection('methods').snapshots();
+
+
+    return stream;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +66,7 @@ class _PaymentMethodsPageState extends State<PaymentMethodsPage> {
                     title: Text(map['name'], style: TextStyle(fontSize: 22),),
                     trailing: Icon(Icons.keyboard_arrow_right),
                     onTap: (){
-                      Navigator.pop(context);
+                      Navigator.pop(context, map['name']);
                     },
                   );
                 }).toList()

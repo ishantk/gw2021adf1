@@ -9,6 +9,8 @@ import 'package:gw2021adf1/auth/register-page.dart';
 import 'package:gw2021adf1/home/home-page.dart';
 import 'package:gw2021adf1/home/splash-page.dart';
 import 'package:gw2021adf1/pages/cart-page.dart';
+import 'package:gw2021adf1/pages/payment-methods-page.dart';
+import 'package:gw2021adf1/pages/razorpay-payment-page.dart';
 import 'package:gw2021adf1/profile/user-addresses.dart';
 import 'package:gw2021adf1/tutorials/NewsPage.dart';
 import 'package:gw2021adf1/tutorials/data-passing.dart';
@@ -142,6 +144,7 @@ class _MyAppState extends State<MyApp> {
          "/cart": (context) => CartPage(),
          "/location-tutorial": (context) => FetchCurrentLocationPage(),
          "/google-maps-tutorial": (context) => GoogleMapsPage(),
+         "/payment": (context) => PaymentMethodsPage(),
        },
 
       initialRoute: "/",

@@ -46,16 +46,15 @@ class _RazorPayPaymentPageState extends State<RazorPayPaymentPage> {
 
   void onPaymentSuccess(PaymentSuccessResponse response) {
     // Navigate the User to a Successful Page
-    response.
+    Navigator.pop(context, 1);
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
-
+    Navigator.pop(context, 0);
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
-
-
+    Navigator.pop(context, 2);
   }
 
   @override
