@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gw2021adf1/pages/payment-methods-page.dart';
 import 'package:gw2021adf1/pages/razorpay-payment-page.dart';
+import 'package:gw2021adf1/pages/success.dart';
 import 'package:gw2021adf1/util/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -16,12 +17,41 @@ class _CartPageState extends State<CartPage> {
   int total = 0;
   String paymentMethod = "";
 
+  // dishes List
+  var dishes = [];
+
   fetchDishesFromCart(){
     // Stream is a Collection i.e. a List of QuerySnapshot
     // QuerySnapshot is our Document :)
     Stream<QuerySnapshot> stream = FirebaseFirestore.instance.collection(Util.USERS_COLLECTION)
         .doc(Util.appUser!.uid).collection(Util.CART_COLLECTION).snapshots();
+
     return stream;
+  }
+
+  placeOrder(){
+    Map<String, dynamic> order = Map<String, dynamic>();
+    order['dishes'] = dishes;
+    order['total'] = total;
+    order['restaurantID'] = dishes.first['restaurantID'];
+    order['address'] = 'NA';
+
+    // Firebase Insert Operation
+    FirebaseFirestore.instance.collection("users")
+        .doc(Util.appUser!.uid)
+        .collection(Util.ORDER_COLLECTION).doc().set(order);
+  }
+
+  clearCart(){
+    dishes.forEach((dish) {
+       // delete every single dish one by one async :)
+      FirebaseFirestore.instance.collection(Util.USERS_COLLECTION).doc(Util.appUser!.uid).collection(Util.CART_COLLECTION).doc(dish['documentID']).delete();
+    });
+  }
+
+  navigateToSuccess(){
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)
+    => SuccessPage(title: "Order Placed", message: "Thank You For Placing the Order \u20b9 ${total}", flag: true),));
   }
 
   @override
@@ -50,7 +80,9 @@ class _CartPageState extends State<CartPage> {
                 padding: EdgeInsets.all(16),
                 children: snapshot.data!.docs.map<Widget>((DocumentSnapshot document){
                   Map<String, dynamic> map = document.data()! as Map<String, dynamic>;
+                  map['documentID'] = document.id;
 
+                  dishes.add(map);
                   total += map['totalPrice'] as int;
 
                   return Card(
@@ -80,7 +112,6 @@ class _CartPageState extends State<CartPage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children:[
-
             Column(
               children: [
                 Text(paymentMethod),
@@ -88,10 +119,9 @@ class _CartPageState extends State<CartPage> {
                     onPressed: () async{
                         paymentMethod = await Navigator.pushNamed(context, "/payment") as String;
 
-                        setState(() {
-                            total = 0;
-                        });
-
+                        // setState(() {
+                        //     total = 0;
+                        // });
                 }, child: Text("Select Payment"))
               ],
             ),
@@ -109,6 +139,9 @@ class _CartPageState extends State<CartPage> {
                   if(result == 1){
                       // Save the data i.e. Dishes as Order in Orders Collection under User
                       // Order Object -> 1. List of Dishes, 2. Total 3. Address, 4. Restaurant Details
+                      placeOrder();
+                      clearCart();
+                      navigateToSuccess();
                   }
 
                   /*if(paymentMethod == "RazorPay"){

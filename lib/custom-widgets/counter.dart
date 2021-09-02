@@ -62,14 +62,24 @@ class _CounterState extends State<Counter> {
                 TextButton(
                   onPressed: () {
                     setState(() {
-                      if (initialValue <= 0) {
+
+                      initialValue--;
+
+                      if(initialValue == 0){
                         initialValue = 0;
                         deleteDishFromCart();
-                        // dish has to be deleted from cart
-                      } else {
-                        initialValue--;
+                      }else{
                         updateDishInCart();
                       }
+
+                      // if (initialValue <= 0) {
+                      //   initialValue = 0;
+                      //   deleteDishFromCart();
+                      //   // dish has to be deleted from cart
+                      // } else {
+                      //   initialValue--;
+                      //   updateDishInCart();
+                      // }
 
                     });
                   },
