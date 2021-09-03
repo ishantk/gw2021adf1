@@ -12,12 +12,14 @@ import 'package:gw2021adf1/pages/cart-page.dart';
 import 'package:gw2021adf1/pages/payment-methods-page.dart';
 import 'package:gw2021adf1/pages/razorpay-payment-page.dart';
 import 'package:gw2021adf1/profile/user-addresses.dart';
+import 'package:gw2021adf1/provider/DataProvider.dart';
 import 'package:gw2021adf1/tutorials/NewsPage.dart';
 import 'package:gw2021adf1/tutorials/data-passing.dart';
 import 'package:gw2021adf1/tutorials/fetch-current-location.dart';
 import 'package:gw2021adf1/tutorials/google-maps-with-location.dart';
 import 'package:gw2021adf1/tutorials/image-picker-task.dart';
 import 'package:gw2021adf1/util/constants.dart';
+import 'package:provider/provider.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   //await Firebase.initializeApp();
@@ -45,7 +47,15 @@ Future<void> main() async{
 
   // to execute the app created by us
   // MyApp -> Object
-  runApp(MyApp());
+  //runApp(MyApp());
+
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => DataProvider(),)
+    ],
+    child: MyApp(), // For MyApp and all the widgets under the tree, we have DataProvider from where we can accrss the data
+  ));
+
 }
 
 
