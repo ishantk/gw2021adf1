@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gw2021adf1/pages/dishes-page.dart';
+import 'package:gw2021adf1/provider/DataProvider.dart';
 import 'package:gw2021adf1/util/constants.dart';
+import 'package:provider/provider.dart';
 
 class RestaurantsPage extends StatefulWidget {
   const RestaurantsPage({Key? key}) : super(key: key);
@@ -19,9 +21,18 @@ class _RestaurantsPageState extends State<RestaurantsPage> {
     return stream;
   }
 
+  fetchRestaurantsAgain(){
+    //var resturant = context.read<DataProvider>().restaurants;
+
+    // whenever restaurants will be modified, automatically the setState will be executed
+    var resturant = context.watch<DataProvider>().restaurants;
+  }
 
   @override
   Widget build(BuildContext context) {
+
+    var restaurants = context.watch<DataProvider>().restaurants;
+
     return StreamBuilder(
         stream: fetchRestaurants(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {

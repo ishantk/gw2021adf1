@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gw2021adf1/model/user.dart';
+import 'package:gw2021adf1/provider/DataProvider.dart';
 import 'package:gw2021adf1/util/constants.dart';
+import 'package:provider/provider.dart';
 
 class UserProfilePage extends StatefulWidget {
   const UserProfilePage({Key? key}) : super(key: key);
@@ -25,7 +27,13 @@ class _UserProfilePageState extends State<UserProfilePage> {
     appUser!.email = document.get('email').toString();
     appUser!.imageUrl = document.get('imageUrl').toString();
   }*/
-  
+
+  fetchUser() async{
+    //AppUser? user = context.read<DataProvider>().appUser;
+    AppUser? user = context.read<DataProvider>().getAppUser();
+    print("USER: ${user.toString()}");
+  }
+
   @override
   Widget build(BuildContext context) {
 
