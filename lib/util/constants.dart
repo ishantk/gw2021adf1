@@ -49,6 +49,10 @@ class Util {
   static AppUser? appUser;
 
   static String imagePath = "NA";
+
+  // Tags can also be read from Firebase
+  // Hard Coding
+  static const TAGS = ["all", "indian", "veg", "non veg", "chinese", "continental"];
 }
 
 class Locale{

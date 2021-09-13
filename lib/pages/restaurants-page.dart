@@ -6,7 +6,11 @@ import 'package:gw2021adf1/util/constants.dart';
 import 'package:provider/provider.dart';
 
 class RestaurantsPage extends StatefulWidget {
-  const RestaurantsPage({Key? key}) : super(key: key);
+  
+  String? tag;
+  
+  RestaurantsPage({Key? key}) : super(key: key);
+  RestaurantsPage.init({Key? key, required this.tag}):  super(key: key);
 
   @override
   _RestaurantsPageState createState() => _RestaurantsPageState();
@@ -18,6 +22,23 @@ class _RestaurantsPageState extends State<RestaurantsPage> {
     // Stream is a Collection i.e. a List of QuerySnapshot
     // QuerySnapshot is our Document :)
     Stream<QuerySnapshot> stream = FirebaseFirestore.instance.collection(Util.RESTAURNAT_COLLECTION).snapshots();
+    return stream;
+  }
+
+  fetchRestaurantsWithFilter(String filter){
+
+    Stream<QuerySnapshot>? stream;
+
+    if(filter == "all"){
+      stream = FirebaseFirestore.instance.collection(Util.RESTAURNAT_COLLECTION).snapshots();
+    }else{
+      stream = FirebaseFirestore.instance.
+      collection(Util.RESTAURNAT_COLLECTION).where("tags", arrayContains:filter).snapshots();
+    }
+
+
+
+
     return stream;
   }
 
@@ -34,7 +55,8 @@ class _RestaurantsPageState extends State<RestaurantsPage> {
     var restaurants = context.watch<DataProvider>().restaurants;
 
     return StreamBuilder(
-        stream: fetchRestaurants(),
+        //stream: fetchRestaurants(),
+      stream: fetchRestaurantsWithFilter(widget.tag!),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
 
           if(snapshot.hasError){
@@ -63,7 +85,8 @@ class _RestaurantsPageState extends State<RestaurantsPage> {
                 )
             )
           });*/
-
+        
+          // Add RestaurantFilters Widget above ListView :)
           return ListView(
             children: snapshot.data!.docs.map<Widget>((DocumentSnapshot document){
               Map<String, dynamic> map = document.data()! as Map<String, dynamic>;
